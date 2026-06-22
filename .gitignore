@@ -1,0 +1,32 @@
+# --- Secrets & local config (NEVER commit) ---
+apikey.txt
+.env
+*.key
+*.secret
+
+# --- Recorded meetings & private data ---
+meetings/
+probes/
+alt/
+*.wav
+*.flac
+*.mp3
+
+# --- Python environment & caches ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Editor / IDE / tool-local ---
+.claude/
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

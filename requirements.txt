@@ -1,0 +1,9 @@
+sounddevice>=0.4.6
+soundfile>=0.12.1
+numpy>=1.26.0
+faster-whisper>=1.0.3
+matplotlib>=3.8.0
+speechbrain>=1.0.0
+pyaudiowpatch>=0.2.12
+requests>=2.25.0
+urllib3>=1.26.0
