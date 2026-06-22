@@ -1,7 +1,14 @@
 # Demo media
 
-Drop the demo recording here as **`demo.gif`** (or `demo.mp4`) and it will show
-up in the main README.
+The current `demo.gif` is a **generated, stylized illustration** (not a real
+screen capture). Regenerate or tweak it with:
+
+```powershell
+python docs/make_demo.py
+```
+
+Want a real recording instead? Capture one (steps below) and overwrite
+`demo.gif` (or add `demo.mp4` and link it in the main README).
 
 ## How to record the demo
 
