@@ -1,10 +1,25 @@
-# 🎧 MeetingScribe — your meetings, transcribed while you zone out
+<div align="center">
 
-> **Bored of your Zoom meetings?** 😴
-> Stop pretending to take notes. Let your GPU do it.
-> Play it, record it, and get a clean transcript **+ an AI meeting report** — fully local, no cloud, no API bill (unless you want one).
+<img src="docs/banner.png" alt="MeetingScribe" width="100%">
 
-**MeetingScribe** taps your Windows system audio (WASAPI loopback), so it transcribes **anything that comes out of your speakers** — Zoom, Teams, Meet, or a random YouTube video — live, on your own machine, with [faster-whisper](https://github.com/SYSTRAN/faster-whisper) on CUDA. Then it hands the transcript to an LLM and spits out a tidy report.
+# 🎧 MeetingScribe
+
+### Bored of your Zoom meetings? 😴 Let your GPU take the notes.
+
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
+![Windows](https://img.shields.io/badge/Windows-WASAPI%20loopback-0078D6?logo=windows&logoColor=white)
+![GPU](https://img.shields.io/badge/GPU-CUDA-76B900?logo=nvidia&logoColor=white)
+![faster-whisper](https://img.shields.io/badge/ASR-faster--whisper-FF6F00)
+![Local](https://img.shields.io/badge/100%25-local-2ea44f)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
+*Local, real-time meeting transcription for Windows. Capture system audio, transcribe live with*
+*[faster-whisper](https://github.com/SYSTRAN/faster-whisper) on CUDA, separate speakers, and get an AI meeting report.*
+**No cloud. No API bill** *(unless you want one).*
+
+[**🚀 Quickstart**](#-quickstart-3-steps) · [**🎬 Demo**](#-demo) · [**🛠️ Usage**](#️-real-world-usage) · [**🔑 Config**](#-configuration-and-secrets) · [**📖 Docs**](vClean_Dokumentation.md)
+
+</div>
 
 ---
 
@@ -107,7 +122,10 @@ python vclean.py --mic --duration 600
 
 ---
 
-## 🔑 Configuration & secrets (do this before the LLM step)
+## 🔑 Configuration and secrets
+
+> Do this before the optional LLM report step.
+
 
 The transcription works with **zero config**. The optional **AI report** step needs an LLM endpoint. Secrets and local config are **gitignored** and never committed — so you set them up yourself:
 
@@ -165,3 +183,13 @@ See [vClean_Dokumentation.md](vClean_Dokumentation.md) (in German).
 ## License
 
 [MIT](LICENSE) — do what you want, just keep the notice. Have fun. 🎉
+
+---
+
+<div align="center">
+
+**Stop taking notes. Start zoning out.** 🎧
+
+If MeetingScribe saved you from one boring meeting, drop a ⭐
+
+</div>
