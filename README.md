@@ -164,4 +164,4 @@ See [vClean_Dokumentation.md](vClean_Dokumentation.md) (in German).
 
 ## License
 
-Add a license of your choice (MIT is a friendly default for sharing with friends).
+[MIT](LICENSE) — do what you want, just keep the notice. Have fun. 🎉
