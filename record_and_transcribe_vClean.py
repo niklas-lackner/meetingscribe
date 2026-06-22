@@ -1435,6 +1435,10 @@ class LiveChunkWindow:
 
         self._tk = tk
         self._closed = False
+        # Tkinter is not thread-safe: worker threads only enqueue text here, and
+        # the main thread renders it from pump(). Without this, calling Tk from
+        # the transcription thread raises "main thread is not in main loop".
+        self._pending: Queue[str] = Queue()
         self._root = tk.Tk()
         self._root.title(title)
         self._root.geometry("1280x760")
@@ -1475,30 +1479,32 @@ class LiveChunkWindow:
         self.pump()
 
     def _append(self, line: str) -> None:
-        if self._closed:
-            return
+        # Must run on the main thread only (called from pump()).
         self._text.configure(state="normal")
         self._text.insert("end", line + "\n\n")
         self._text.see("end")
         self._text.configure(state="disabled")
 
     def add_chunk(self, chunk_index: int, text: str) -> None:
-        if self._closed:
-            return
+        # Thread-safe: only enqueues. Rendering happens in pump() on the main thread.
         content = text if text else "[kein erkannter Text]"
-        self._append(f"[{chunk_index}] {content}")
-        self.pump()
+        self._pending.put(f"[{chunk_index}] {content}")
 
     def add_status(self, text: str) -> None:
-        if self._closed:
-            return
-        self._append(f"[status] {text}")
-        self.pump()
+        # Thread-safe: only enqueues. Rendering happens in pump() on the main thread.
+        self._pending.put(f"[status] {text}")
 
     def pump(self) -> None:
+        # Must be called from the main thread (the one that created the Tk root).
         if self._closed:
             return
         try:
+            while True:
+                try:
+                    line = self._pending.get_nowait()
+                except Empty:
+                    break
+                self._append(line)
             self._root.update_idletasks()
             self._root.update()
         except self._tk.TclError:
@@ -1629,6 +1635,8 @@ def run_vclean(args: argparse.Namespace) -> int:
                     captured_frames += arr_f32.shape[0]
                     for segment in segmenter.feed(np.asarray(mono, dtype=np.float32), frame_start):
                         processor.submit(segment)
+                    if live_window is not None:
+                        live_window.pump()
             except KeyboardInterrupt:
                 interrupted = True
                 print("Manual stop received, finalizing quickly...")
@@ -1641,6 +1649,8 @@ def run_vclean(args: argparse.Namespace) -> int:
                 processor.submit(tail)
             processor.close()
             entries = processor.entries
+            if live_window is not None:
+                live_window.pump()
 
     else:
         device_idx, channels, sample_rate, extra_settings, source_name = resolve_recording_config(args.device, args.mic, args.device_index)
@@ -1694,6 +1704,8 @@ def run_vclean(args: argparse.Namespace) -> int:
                     try:
                         raw = queue.get(timeout=0.2)
                     except Empty:
+                        if live_window is not None:
+                            live_window.pump()
                         continue
                     full_audio_parts.append(raw)
                     mono = np.mean(raw, axis=1) if raw.ndim == 2 else raw
@@ -1701,6 +1713,8 @@ def run_vclean(args: argparse.Namespace) -> int:
                     captured_frames += raw.shape[0]
                     for segment in segmenter.feed(np.asarray(mono, dtype=np.float32), frame_start):
                         processor.submit(segment)
+                    if live_window is not None:
+                        live_window.pump()
         except KeyboardInterrupt:
             interrupted = True
             print("Manual stop received, finalizing quickly...")
@@ -1712,6 +1726,8 @@ def run_vclean(args: argparse.Namespace) -> int:
             processor.submit(tail)
         processor.close()
         entries = processor.entries
+        if live_window is not None:
+            live_window.pump()
 
     if full_audio_parts and not args.no_save_audio:
         full_audio = np.concatenate(full_audio_parts, axis=0)
