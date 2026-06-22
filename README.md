@@ -4,7 +4,7 @@
 
 # 🎧 MeetingScribe
 
-### Bored of your Zoom meetings? 😴 Let your GPU take the notes.
+### Got one of *those* never-ending meetings coming up? 😅 Let your GPU take the notes.
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-WASAPI%20loopback-0078D6?logo=windows&logoColor=white)
@@ -188,8 +188,8 @@ See [vClean_Dokumentation.md](vClean_Dokumentation.md) (in German).
 
 <div align="center">
 
-**Stop taking notes. Start zoning out.** 🎧
+**Stay in the conversation — let your GPU keep the notes.** 🎧
 
-If MeetingScribe saved you from one boring meeting, drop a ⭐
+If MeetingScribe got you through one marathon meeting in one piece, drop a ⭐
 
 </div>

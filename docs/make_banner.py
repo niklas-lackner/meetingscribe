@@ -74,7 +74,7 @@ def build():
     d.text((tx, 96), "MeetingScribe", font=F_TITLE, fill=TEXT)
     tw = F_TITLE.getlength("MeetingScribe")
     d.line((tx + 4, 188, tx + tw, 188), fill=ACCENT, width=5)
-    d.text((tx + 4, 200), "Your meetings, transcribed while you zone out.",
+    d.text((tx + 4, 200), "Never miss a word — even in the long ones.",
            font=F_TAG, fill=DIM)
     d.text((tx + 4, 244), "100% local  ·  faster-whisper + CUDA  ·  live transcript + AI report",
            font=F_TINY, fill=(110, 122, 150))
