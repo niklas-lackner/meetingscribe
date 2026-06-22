@@ -1523,7 +1523,7 @@ def create_live_window(args: argparse.Namespace) -> Any:
     return window
 
 
-def run_vclean(args: argparse.Namespace) -> int:
+def run_meetingscribe(args: argparse.Namespace) -> int:
     if args.regenerate_reports:
         return regenerate_reports_from_raw_json(args)
 
@@ -1795,7 +1795,7 @@ def run_vclean(args: argparse.Namespace) -> int:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="vClean: dynamic meeting recorder with Whisper, optional SpeechBrain, and Ollama/OpenAI-compatible report finalization."
+        description="MeetingScribe: dynamic meeting recorder with Whisper, optional SpeechBrain, and Ollama/OpenAI-compatible report finalization."
     )
     parser.add_argument("--duration", type=int, default=600, help="Recording length in seconds")
     parser.add_argument("--out", type=Path, default=Path("meeting.wav"), help="Output wav file")
@@ -1860,7 +1860,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        return run_vclean(args)
+        return run_meetingscribe(args)
     except KeyboardInterrupt:
         print("Manual stop received at top-level. Exiting cleanly.")
         return 0

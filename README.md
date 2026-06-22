@@ -17,7 +17,7 @@
 *[faster-whisper](https://github.com/SYSTRAN/faster-whisper) on CUDA, separate speakers, and get an AI meeting report.*
 **No cloud. No API bill** *(unless you want one).*
 
-[**🚀 Quickstart**](#-quickstart-3-steps) · [**🎬 Demo**](#-demo) · [**🛠️ Usage**](#️-real-world-usage) · [**🔑 Config**](#-configuration-and-secrets) · [**📖 Docs**](vClean_Dokumentation.md)
+[**🚀 Quickstart**](#-quickstart-3-steps) · [**🎬 Demo**](#-demo) · [**🛠️ Usage**](#️-real-world-usage) · [**🔑 Config**](#-configuration-and-secrets) · [**📖 Docs**](DOCUMENTATION.md)
 
 </div>
 
@@ -74,26 +74,26 @@ Play a YouTube video → MeetingScribe transcribes it live on the "TV screen" �
 The way this was actually used day-to-day (long meeting, system audio, hosted LLM report):
 
 ```powershell
-python vClean_hostedLLM.py --output-loopback --device-index 13 --duration 7000
+python meetingscribe_hosted.py --output-loopback --device-index 13 --duration 7000
 ```
 
 Plain local-only run (no hosted LLM):
 
 ```powershell
-python vclean.py --output-loopback --device-index 13 --duration 7000
+python meetingscribe.py --output-loopback --device-index 13 --duration 7000
 ```
 
 With a local Ollama model for the report (no API key needed):
 
 ```powershell
-python vclean.py --output-loopback --device-index 13 --duration 3600 `
+python meetingscribe.py --output-loopback --device-index 13 --duration 3600 `
   --llm-finalize --llm-api-base http://localhost:11434/v1 --llm-model qwen2.5:14b-instruct
 ```
 
 Mic instead of system audio:
 
 ```powershell
-python vclean.py --mic --duration 600
+python meetingscribe.py --mic --duration 600
 ```
 
 ### Outputs (per session, in `meetings/<timestamp>/`)
@@ -136,7 +136,7 @@ The transcription works with **zero config**. The optional **AI report** step ne
    ```
    Set `OPENAI_API_KEY` (or just point `--llm-api-base` at `http://localhost:11434/v1` for Ollama — no key needed).
 
-2. **For the hosted-LLM variant (`vClean_hostedLLM.py`):**
+2. **For the hosted-LLM variant (`meetingscribe_hosted.py`):**
    It reads its key from either the `DIZ_AI_KEY` environment variable or an `apikey.txt` file in the project root. Create your own:
    ```powershell
    copy apikey.txt.example apikey.txt
@@ -164,10 +164,10 @@ pip install -r requirements.txt
 
 | File | Role |
 |------|------|
-| `record_and_transcribe_vClean.py` | the engine (recording, transcription, speakers, reports, LLM) |
-| `vclean.py` | thin launcher for the engine |
+| `meetingscribe.py` | **run this** — launcher for the engine |
+| `meetingscribe_core.py` | the engine (recording, transcription, speakers, reports, LLM) |
+| `meetingscribe_hosted.py` | launcher with hosted-LLM defaults |
 | `demo.py` | one-click demo (loopback + live TV window + short run) |
-| `vClean_hostedLLM.py` | launcher with hosted-LLM defaults |
 | `diagnose_hosted_llm.py`, `llm_api_smoke_test.py`, `retrofit_hosted_llm_dataset.py` | hosted-LLM utilities |
 
 ---
@@ -176,7 +176,7 @@ pip install -r requirements.txt
 
 Want the full, plain-language walkthrough of how it all works (recording →
 Whisper → segmentation → speaker diarization → reports → optional AI)?
-See [vClean_Dokumentation.md](vClean_Dokumentation.md) (in German).
+See [DOCUMENTATION.md](DOCUMENTATION.md) (in German).
 
 ---
 

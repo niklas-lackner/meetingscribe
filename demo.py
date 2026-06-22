@@ -8,7 +8,7 @@ Typical demo flow:
   4. When the duration ends (default 180s) the LLM report is written to the
      meetings/ session folder next to the recording.
 
-This is a thin wrapper around record_and_transcribe_vClean.py that turns on
+This is a thin wrapper around meetingscribe_core.py that turns on
 sensible demo defaults (system-audio loopback + live TV window + short run).
 Everything can be overridden on the command line.
 """
@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import sys
 
-from record_and_transcribe_vClean import main
+from meetingscribe_core import main
 
 
 def _has_flag(argv: list[str], flag: str) -> bool:

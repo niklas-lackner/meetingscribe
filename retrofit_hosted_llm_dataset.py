@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from types import SimpleNamespace
 
-from record_and_transcribe_vClean import regenerate_reports_from_raw_json
+from meetingscribe_core import regenerate_reports_from_raw_json
 
 DEFAULT_API_BASE = os.environ.get("DIZ_AI_BASE", "https://chat.ai.diz.uk-erlangen.de/api")
 DEFAULT_MODEL = os.environ.get("DIZ_AI_MODEL", "gemma4:31b")
@@ -51,7 +51,7 @@ def build_args(raw_json_path: Path, api_base: str, model: str, api_key: str) -> 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Apply hosted LLM postprocessing retroactively to existing vClean meeting_raw.json files."
+        description="Apply hosted LLM postprocessing retroactively to existing MeetingScribe meeting_raw.json files."
     )
     parser.add_argument("--meetings-root", type=Path, default=Path("meetings"), help="Root folder with meeting sessions")
     parser.add_argument("--pattern", default="meeting_raw.json", help="Filename to search for under the meetings root")

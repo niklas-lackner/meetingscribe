@@ -1,12 +1,12 @@
-# vClean – Dokumentation für jedermann
+# MeetingScribe – Dokumentation für jedermann
 
-> **vClean** ist ein Python-Programm, das Meetings automatisch aufnimmt, in Text umwandelt, verschiedene Sprecher erkennt und am Ende professionelle Protokolle erstellt – wahlweise auch mit Hilfe einer KI.
+> **MeetingScribe** ist ein Python-Programm, das Meetings automatisch aufnimmt, in Text umwandelt, verschiedene Sprecher erkennt und am Ende professionelle Protokolle erstellt – wahlweise auch mit Hilfe einer KI.
 
 ---
 
 ## Inhaltsverzeichnis
 
-1. [Was macht vClean überhaupt?](#was-macht-vclean-überhaupt)
+1. [Was macht MeetingScribe überhaupt?](#was-macht-meetingscribe-überhaupt)
 2. [Wie läuft das Programm ab? (Gesamtablauf)](#wie-läuft-das-programm-ab)
 3. [Die wichtigsten Bausteine erklärt](#die-wichtigsten-bausteine-erklärt)
    - [Audio aufnehmen](#1-audio-aufnehmen)
@@ -23,9 +23,9 @@
 
 ---
 
-## Was macht vClean überhaupt?
+## Was macht MeetingScribe überhaupt?
 
-Stell dir vor, du hast ein Meeting, ein Telefonat oder eine Videokonferenz. vClean läuft dabei still im Hintergrund und:
+Stell dir vor, du hast ein Meeting, ein Telefonat oder eine Videokonferenz. MeetingScribe läuft dabei still im Hintergrund und:
 
 1. **Nimmt den Ton auf** – entweder vom Mikrofon oder direkt vom Computerausgang (also alles, was aus den Lautsprechern kommt).
 2. **Erkennt automatisch, wann jemand spricht** – Stille wird ignoriert, nur echte Sprache wird verarbeitet.
@@ -208,42 +208,42 @@ Nach einer Aufnahme findet man im Sitzungsordner (z. B. `meetings/meeting_202504
 
 ### Einfachster Start (Systemton, 10 Minuten)
 ```bash
-python vclean.py
+python meetingscribe.py
 ```
 
 ### Mikrofon aufnehmen
 ```bash
-python vclean.py --mic
+python meetingscribe.py --mic
 ```
 
 ### Systemton aufnehmen (Windows WASAPI Loopback)
 ```bash
-python vclean.py --output-loopback
+python meetingscribe.py --output-loopback
 ```
 
 ### 30-minütiges Meeting aufnehmen
 ```bash
-python vclean.py --duration 1800
+python meetingscribe.py --duration 1800
 ```
 
 ### Mit KI-Protokoll (OpenAI)
 ```bash
-python vclean.py --llm-finalize --llm-api-key sk-... --llm-model gpt-4.1-mini
+python meetingscribe.py --llm-finalize --llm-api-key sk-... --llm-model gpt-4.1-mini
 ```
 
 ### Mit lokalem Ollama-Modell
 ```bash
-python vclean.py --llm-finalize --llm-api-base http://localhost:11434/v1 --llm-model llama3
+python meetingscribe.py --llm-finalize --llm-api-base http://localhost:11434/v1 --llm-model llama3
 ```
 
 ### Verfügbare Audiogeräte anzeigen
 ```bash
-python vclean.py --list-devices
+python meetingscribe.py --list-devices
 ```
 
 ### Meeting in bestimmtem Ordner speichern
 ```bash
-python vclean.py --meeting-folder C:\Protokolle\MeinMeeting
+python meetingscribe.py --meeting-folder C:\Protokolle\MeinMeeting
 ```
 
 Die WAV-Ausgabe wird als `PCM_16` gespeichert und ist dadurch kleiner als vorher.
@@ -349,4 +349,4 @@ Im Code ist Deutsch (`language="de"`) fest eingestellt. Um andere Sprachen zu ve
 
 ---
 
-*Erstellt automatisch aus dem Quellcode von vClean.*
+*Erstellt automatisch aus dem Quellcode von MeetingScribe.*

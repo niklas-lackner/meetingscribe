@@ -1,4 +1,4 @@
-from record_and_transcribe_vClean import main
+from meetingscribe_core import main
 
 
 if __name__ == "__main__":

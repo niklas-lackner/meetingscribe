@@ -4,7 +4,7 @@ import argparse
 import os
 from pathlib import Path
 
-from record_and_transcribe_vClean import call_openai_compatible_chat, parse_llm_json_response
+from meetingscribe_core import call_openai_compatible_chat, parse_llm_json_response
 
 DEFAULT_API_BASE = os.environ.get("DIZ_AI_BASE", "https://chat.ai.diz.uk-erlangen.de/api")
 DEFAULT_MODEL = os.environ.get("DIZ_AI_MODEL", "mistral-large:123b")

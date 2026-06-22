@@ -4,7 +4,7 @@ import os
 import sys
 from pathlib import Path
 
-from record_and_transcribe_vClean import main
+from meetingscribe_core import main
 
 DEFAULT_API_BASE = os.environ.get("DIZ_AI_BASE", "https://chat.ai.diz.uk-erlangen.de/api")
 DEFAULT_MODEL = os.environ.get("DIZ_AI_MODEL", "gemma4:31b")
